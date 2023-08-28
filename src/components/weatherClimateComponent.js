@@ -1,7 +1,6 @@
 import React from "react";
 
 const WeatherClimateComponent = ({ title, desc, setImage, data, src }) => {
-    debugger;
   return (
     <>
       <h2>{title}</h2>

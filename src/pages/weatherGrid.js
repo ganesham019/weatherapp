@@ -8,29 +8,30 @@ const WeatherGrid = ({ city }) => {
   let src = "https://cdn-icons-png.flaticon.com/512/2480/2480660.png";
   const [weatherData, setWeatherData] = useState();
 
-  // fetching data asynchronaously if the city is change
-  async function getFetchData() {
-    try {
-      if (city.length > 2) {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=` +
-            apiKey
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setWeatherData(data);
-      } else {
-        setWeatherData("");
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
+  
   // if the city is change the input value  - useEffect will trigger everytime
   useEffect(() => {
+// fetching data asynchronaously if the city is change
+async function getFetchData() {
+  try {
+    if (city.length > 2) {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=` +
+          apiKey
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setWeatherData(data);
+    } else {
+      setWeatherData("");
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
     getFetchData();
   }, [city]);
 
